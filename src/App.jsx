@@ -32,3 +32,8 @@ export default function App() {
     </Provider>
   );
 }
+
+PuppyDetails.defaultProps = {
+  selectedPuppyId: null,
+  setSelectedPuppyId: () => {},
+};

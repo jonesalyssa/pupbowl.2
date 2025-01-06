@@ -1,4 +1,4 @@
-import api from "../../store/api";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 /*
 TODO: Define the following 4 endpoints:
@@ -14,13 +14,20 @@ The mutation endpoints should invalidate the "Puppy" tag.
 functions for each endpoint.
 */
 
-const puppyApi = api.injectEndpoints({
-  endpoints: (build) => ({}),
+const puppyApi = createApi({
+  reducerPath: "puppyApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://fsa-puppy-bowl.herokuapp.com/api/",
+  }),
+  tagTypes: ["Puppy"],
+  endpoints: (builder) => ({
+    getPuppies: builder.query({
+      query: () => "players",
+      providesTags: ["Puppy"],
+    }),
+  }),
 });
 
-export const {
-  useGetPuppiesQuery,
-  useGetPuppyQuery,
-  useAddPuppyMutation,
-  useDeletePuppyMutation,
-} = puppyApi;
+export const { useGetPuppiesQuery } = puppyApi;
+
+export default puppyApi;
